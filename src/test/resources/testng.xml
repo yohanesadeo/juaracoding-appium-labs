@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mobile eCommerce Suite Test">
+  <test name="Authentication Test">
+    <classes>
+      <class name="com.juaracoding.labs.authentications.LoginTest"></class>
+    </classes>
+  </test>
+</suite>

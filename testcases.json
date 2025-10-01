@@ -1,0 +1,45 @@
+[
+    {
+        "id": "TC-LOGIN-001",
+        "description": "Verify that a user can log in with valid credentials.",
+        "pre-conditions": [
+            "Application is installed.",
+            "User in login screen."
+        ],
+        "test-steps": [
+            "Open the application.",
+            "Enter valid username in username field.",
+            "Enter valid password in password field.",
+            "Click on the 'Login' button."
+        ],
+        "test-data": {
+            "username": "standard_user",
+            "password": "secret_sauce"
+        },
+        "expected-result": "User is successfully logged in and redirected to the dashboard.",
+        "priority": "High",
+        "isPositive": true
+    },
+    {
+        "id": "TC-LOGIN-002",
+        "description": "Verify that a user cannot log in with locked out credentials.",
+        "pre-conditions": [
+            "Application is installed.",
+            "User in login screen."
+        ],
+        "test-steps": [
+            "Open the application.",
+            "Enter locked out username in username field.",
+            "Enter valid password in password field.",
+            "Click on the 'Login' button."
+        ],
+        "test-data": {
+            "username": "locked_out_user",
+            "password": "secret_sauce"
+        },
+        "expected-result": "User sees an error message indicating the account is locked.",
+        "priority": "High",
+        "isPositive": false
+    }
+    
+]
