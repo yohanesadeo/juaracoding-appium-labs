@@ -1,6 +1,10 @@
 package com.juaracoding.labs.screens;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -10,32 +14,53 @@ public class LoginScreen {
     private By username = AppiumBy.xpath("//android.widget.EditText[@content-desc=\"test-Username\"]");
     private By password = AppiumBy.xpath("//android.widget.EditText[@content-desc=\"test-Password\"]");
     private By button = AppiumBy.xpath("//android.view.ViewGroup[@content-desc=\"test-LOGIN\"]");
-    private By errorMessage = AppiumBy.xpath("//android.view.ViewGroup[@content-desc=\"test-Error message\"]");
+    private By errorMessage = AppiumBy
+            .xpath("//android.view.ViewGroup[@content-desc=\"test-Error message\"]/android.widget.TextView");
 
     public LoginScreen(AndroidDriver driver) {
         this.driver = driver;
     }
 
-    public void fillUsername(String username) {
-        driver.findElement(this.username).sendKeys(username);
+    public String fillUsername(String username) {
+        WebElement element = driver.findElement(this.username);
+        element.sendKeys(username);
+        return element.getText();
     }
 
-    public void fillPassword(String password) {
-        driver.findElement(this.password).sendKeys(password);
+    public String fillPassword(String password) {
+        WebElement element = driver.findElement(this.password);
+        element.sendKeys(password);
+        return element.getText();
+    }
+
+    public boolean usernameIsVisible() {
+        WebElement element = driver.findElement(this.username);
+        return element.isDisplayed();
+    }
+
+    public boolean passwordIsVisible() {
+        WebElement element = driver.findElement(this.password);
+        return element.isDisplayed();
     }
 
     public void click() {
         driver.findElement(button).click();
     }
 
-    public String getMessage() {
+    public String getErrorMessage() {
         return driver.findElement(errorMessage).getText();
     }
 
-    public void login(String username, String password) {
-        fillUsername(username);
-        fillPassword(password);
+    public Map<String, String> login(String username, String password) {
+        String valueUsername = fillUsername(username);
+        String valuePassword = fillPassword(password);
+        Map<String, String> credentials = new HashMap<>();
+        credentials.put("username", valueUsername);
+        credentials.put("password", valuePassword);
+        System.out.println(credentials);
         click();
+
+        return credentials;
     }
 
     public void login() {

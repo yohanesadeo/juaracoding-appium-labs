@@ -1,6 +1,7 @@
 package com.juaracoding.labs.authentications;
 
 import java.net.MalformedURLException;
+import java.util.Map;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -22,7 +23,12 @@ public class LoginTest {
         AndroidDriver driver = DriverService.buildDriver();
 
         LoginScreen loginScreen = new LoginScreen(driver);
-        loginScreen.login("standard_user", "secret_sauce");
+        Assert.assertTrue(loginScreen.usernameIsVisible());
+        Assert.assertTrue(loginScreen.passwordIsVisible());
+
+        Map<String, String> map = loginScreen.login("standard_user", "secret_sauce");
+
+        Assert.assertEquals(map.get("username"), "standard_user");
 
         InventoryScreen inventoryScreen = new InventoryScreen(driver);
         Assert.assertEquals(inventoryScreen.getHeaderText(), "PRODUCTS");
@@ -31,7 +37,15 @@ public class LoginTest {
     }
 
     @Test
-    public void loginNegativeWithLockedOutUserTest() {
+    public void loginNegativeWithLockedOutUserTest() throws MalformedURLException {
+        AndroidDriver driver = DriverService.buildDriver();
+
+        LoginScreen loginScreen = new LoginScreen(driver);
+        loginScreen.login("locked_out_user", "secret_sauce");
+
+        Assert.assertEquals(loginScreen.getErrorMessage(), "Sorry, this user has been locked out.");
+
+        driver.quit();
     }
 
 }

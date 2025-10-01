@@ -40,6 +40,55 @@
         "expected-result": "User sees an error message indicating the account is locked.",
         "priority": "High",
         "isPositive": false
+    },
+    {
+        "id": "TC-CATALOGUE-001",
+        "description": "Verify that a user has successfully logged in and go to catalogue page",
+        "pre-conditions": [
+            "Application is installed.",
+            "User is successfully logged in."
+        ],
+        "test-steps": [
+            "Open the application.",
+            "Logged in with valid credentials.",
+            "Find element product named Sauce Labs Bacpack",
+            "Click add to cart on the product"
+        ],
+        "test-data": {
+            "username": "standard_user",
+            "password": "secret_sauce"
+        },
+        "expected-result": "Button change to remove and cart value to 1",
+        "priority": "High",
+        "isPositive": true
+    },
+    {
+        "id": "TC-CHECKOUT-001",
+        "description": "Verify that a user can checkout with minumin 1 product on cart",
+        "pre-conditions": [
+            "Application is installed.",
+            "User is successfully logged in.",
+            "User already in catalog screen",
+            "User already add items on cart"
+        ],
+        "test-steps": [
+            "Open the application.",
+            "Logged in with valid credentials.",
+            "Find element product named Sauce Labs Bacpack",
+            "Click add to cart on the product",
+            "In cart page, click CHECKOUT button",
+            "In information screen, fill all field (First Name, Last Name, Zip/Postal Code",
+            "Click continue",
+            "In OVERVIEW (summary) screen, user verified that items and prices is valid",
+            "Click FINISH button"
+        ],
+        "test-data": {
+            "username": "standard_user",
+            "password": "secret_sauce"
+        },
+        "expected-result": "User goes to CHECKOUT: COMPLETE! screen with 'THANK YOU FOR YOUR ORDER' message",
+        "priority": "High",
+        "isPositive": true        
     }
     
 ]
