@@ -12,6 +12,8 @@ public class CheckoutScreen {
 
     private By headerTitle = AppiumBy.xpath("//android.widget.TextView[@text=\"YOUR CART\"]");
     private By buttonCheckout = AppiumBy.xpath("//android.view.ViewGroup[@content-desc=\"test-CHECKOUT\"]");
+    private By buttonCart = AppiumBy.xpath("//android.view.ViewGroup[@content-desc=\"test-Cart\"]");
+
 
     public CheckoutScreen(AndroidDriver driver) {
         this.driver = driver;
@@ -24,6 +26,10 @@ public class CheckoutScreen {
 
     public void checkout() {
         driver.findElement(buttonCheckout).click();
+    }
+
+    public void cart() {
+        driver.findElement(buttonCart).click();
     }
 }
 
